@@ -13,10 +13,10 @@ int save_boxes(const char *filename) {
     }
     for (i = 0; i < box_count; i++) {
         fprintf(f, "%d|%s|%s|%.2f\n",
-                (*boxes[i]).number,
-                (*boxes[i]).name,
-                (*boxes[i]).category,
-                (*boxes[i]).price);
+                boxes[i].number,
+                boxes[i].name,
+                boxes[i].category,
+                boxes[i].price);
     }
     fclose(f);
     printf("Сохранено %d записей в файл %s\n", box_count, filename);

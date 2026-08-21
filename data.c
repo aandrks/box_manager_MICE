@@ -51,10 +51,10 @@ void add_box(int number, const char *name, const char *category, float price) {
         printf("Коробка с номером %d уже существует\n", number);
         return;
     }
-    (*boxes[box_count]).number = number;
-    strcpy((*boxes[box_count]).name, name);
-    strcpy((*boxes[box_count]).category, category);
-    (*boxes[box_count]).price = price;
+    boxes[box_count].number = number;
+    strcpy(boxes[box_count].name, name);
+    strcpy(boxes[box_count].category, category);
+    boxes[box_count].price = price;
     box_count++;
     printf("Коробка %d добавлена. Всего: %d\n", number, box_count);
 }
@@ -70,10 +70,10 @@ void display_all_boxes(void) {
     printf("------------------------------------------------------------\n");
     for (i = 0; i < box_count; i++) {
         printf("| %-5d | %-27s | %-12s | %6.2f |\n",
-               (*boxes[i]).number,
-               (*boxes[i]).name,
-               (*boxes[i]).category,
-               (*boxes[i]).price);
+               boxes[i].number,
+               boxes[i].name,
+               boxes[i].category,
+               boxes[i].price);
     }
     printf("------------------------------------------------------------\n");
     printf("Всего записей: %d\n\n", box_count);
@@ -82,7 +82,7 @@ void display_all_boxes(void) {
 int find_box_by_number(int number) {
     int i;
     for (i = 0; i < box_count; i++) {
-        if ((*boxes[i]).number == number) {
+        if (boxes[i].number == number) {
             return i;
         }
     }
@@ -92,7 +92,7 @@ int find_box_by_number(int number) {
 int find_box_by_name(const char *name) {
     int i;
     for (i = 0; i < box_count; i++) {
-        if (strcmp((*boxes[i]).name, name) == 0) {
+        if (strcmp(boxes[i].name, name) == 0) {
             return i;
         }
     }
@@ -107,7 +107,7 @@ int delete_box_by_number(int number) {
         return 0;
     }
     for (i = idx; i < box_count - 1; i++) {
-        (*boxes[i]) = (*boxes[i + 1]);
+        boxes[i] = boxes[i + 1];
     }
     box_count--;
     printf("Коробка %d удалена. Осталось: %d\n", number, box_count);

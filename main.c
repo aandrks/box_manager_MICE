@@ -34,6 +34,7 @@ int main() {
         printf("9. Информация о хранилище\n");
         printf("0. Выход\n");
         printf("Записей: %d | Ёмкость: %d\n", box_count, box_capacity);
+        printf("После выбора пункта меню и любого действия подтвердите выбор повторным нажатием <Enter>\n");
 
         choice = get_int_input("Выберите действие: ");
         clear_input_buffer();
@@ -46,6 +47,7 @@ int main() {
                     printf("Коробка с номером %d уже существует\n", number);
                     break;
                 }
+                clear_input_buffer();
                 get_string_input("Название товара: ", name, MAX_NAME);
                 get_string_input("Категория: ", category, MAX_CAT);
                 price = get_float_input("Цена: ");
@@ -59,29 +61,31 @@ int main() {
                 number = get_int_input("Введите номер: ");
                 int idx = find_box_by_number(number);
                 if (idx != -1) {
-                    printf("Номер: %d\n", (*boxes[idx]).number);
-                    printf("Название: %s\n", (*boxes[idx]).name);
-                    printf("Категория: %s\n", (*boxes[idx]).category);
-                    printf("Цена: %.2f\n", (*boxes[idx]).price);
+                    printf("Номер: %d\n", boxes[idx].number);
+                    printf("Название: %s\n", boxes[idx].name);
+                    printf("Категория: %s\n", boxes[idx].category);
+                    printf("Цена: %.2f\n", boxes[idx].price);
                 } else {
                     printf("Не найдено\n");
                 }
                 break;
             }
             case 4: {
+                clear_input_buffer();
                 get_string_input("Введите название: ", name, MAX_NAME);
                 int idx = find_box_by_name(name);
                 if (idx != -1) {
-                    printf("Номер: %d\n", (*boxes[idx]).number);
-                    printf("Название: %s\n", (*boxes[idx]).name);
-                    printf("Категория: %s\n", (*boxes[idx]).category);
-                    printf("Цена: %.2f\n", (*boxes[idx]).price);
+                    printf("Номер: %d\n", boxes[idx].number);
+                    printf("Название: %s\n", boxes[idx].name);
+                    printf("Категория: %s\n", boxes[idx].category);
+                    printf("Цена: %.2f\n", boxes[idx].price);
                 } else {
                     printf("Не найдено\n");
                 }
                 break;
             }
             case 5: {
+                clear_input_buffer();
                 number = get_int_input("Номер для удаления: ");
                 delete_box_by_number(number);
                 break;

@@ -36,6 +36,7 @@ float get_float_input(const char *prompt) {
 
 void get_string_input(const char *prompt, char *buffer, int size) {
     printf("%s", prompt);
+    clear_input_buffer();
     fgets(buffer, size, stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
 }
