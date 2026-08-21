@@ -1,0 +1,17 @@
+*.exe
+*.o
+*.obj
+*.out
+*.a
+*.so
+*.dll
+
+boxes.txt
+
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln
+*.vcxproj
+
