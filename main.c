@@ -28,7 +28,6 @@ int main() {
         printf("0. Выход\n");
         printf("Коробок: %d\n", box_count);
         choice = get_int_input("Выберите действие: ");
-        clear_input_buffer();
 
         switch (choice) {
             case 1:
@@ -37,6 +36,7 @@ int main() {
                 break;
             case 2:
                 num = get_int_input("Номер коробки: ");
+                clear_input_buffer();
                 get_string_input("Название товара: ", name, MAX_NAME);
                 get_string_input("Категория: ", cat, MAX_CAT);
                 price = get_float_input("Цена: ");
@@ -66,7 +66,13 @@ int main() {
                 load_boxes(FILENAME);
                 break;
             case 9:
-                clear_all_boxes();
+                printf("Очистить все? (1-да / 0-нет): ");
+                int confirm;
+                scanf("%d", &confirm);
+                clear_input_buffer();
+                if (confirm == 1) {
+                    clear_all_boxes();
+                }
                 break;
             case 0:
                 printf("Выход...\n");

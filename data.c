@@ -7,6 +7,21 @@ Box *boxes = NULL;
 int box_count = 0;
 int box_capacity = 0;
 
+int utf8_strlen(const char *s) {
+    int len = 0;
+    while (*s) {
+        if ((*s & 0xC0) != 0x80) len++;
+        s++;
+    }
+    return len;
+}
+
+void print_padded(const char *s, int width) {
+    int len = utf8_strlen(s);
+    printf("%s", s);
+    for (int i = len; i < width; i++) putchar(' ');
+}
+
 void init_storage(int initial_capacity) {
     if (initial_capacity <= 0) initial_capacity = 10;
     boxes = (Box*)malloc(initial_capacity * sizeof(Box));
@@ -106,14 +121,21 @@ void display_box(int box_number) {
         return;
     }
     printf("\nСодержимое коробки %d:\n", box_number);
-    printf("------------------------------------------------------------\n");
-    printf("| № | Название                     | Категория    | Цена    |\n");
-    printf("------------------------------------------------------------\n");
+    printf("+----+------------------------------------------+---------------------------+------------+\n");
+    printf("| №  | Название                                 | Категория                 | Цена       |\n");
+    printf("+----+------------------------------------------+---------------------------+------------+\n");
     for (int i = 0; i < b->item_count; i++) {
-        printf("| %-2d| %-27s | %-12s | %6.2f |\n",
-               i+1, b->items[i].name, b->items[i].category, b->items[i].price);
+        printf("| ");
+        printf("%-2d", i+1);
+        printf(" | ");
+        print_padded(b->items[i].name, 40);
+        printf(" | ");
+        print_padded(b->items[i].category, 25);
+        printf(" | ");
+        printf("%10.2f", b->items[i].price);
+        printf(" |\n");
     }
-    printf("------------------------------------------------------------\n");
+    printf("+----+------------------------------------------+---------------------------+------------+\n");
 }
 
 void display_all_boxes(void) {
